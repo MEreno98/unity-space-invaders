@@ -7,6 +7,10 @@ public class GeneradorAliens : MonoBehaviour
 
 	// Publicamos la variable para conectarla desde el editor
 	public Rigidbody2D prefabAlien1;
+	public Rigidbody2D prefabAlien2;
+	public Rigidbody2D prefabAlien3;
+	public Rigidbody2D prefabAlien4;
+	public int nivel;
 
 	// Referencia para guardar una matriz de objetos
 	private Rigidbody2D[,] aliens;
@@ -31,9 +35,14 @@ public class GeneradorAliens : MonoBehaviour
 	// Velocidad a la que se desplazan los aliens (medido en u/s)
 	private float velocidad = 5f;
 
+	private GameObject marcador;
+
 	// Use this for initialization
 	void Start ()
 	{
+		// Localizamos el objeto que contiene el marcador
+		marcador = GameObject.Find ("Marcador");
+
 		// Rejilla de 4x7 aliens
 		generarAliens (FILAS, COLUMNAS, 1.5f, 1.0f);
 
@@ -43,6 +52,10 @@ public class GeneradorAliens : MonoBehaviour
 		// Calculamos el límite izquierdo y el derecho de la pantalla (añadimos una unidad a cada lado como margen)
 		limiteIzq = -1.0f * distanciaHorizontal + 1;
 		limiteDer = 1.0f * distanciaHorizontal - 1;
+
+		if (nivel > 1) {
+			marcador.GetComponent<ControlMarcador> ().puntos = PlayerPrefs.GetInt ("marcador");
+		}
 	}
 	
 	// Update is called once per frame
@@ -90,7 +103,21 @@ public class GeneradorAliens : MonoBehaviour
 
 		// Si no quedan aliens, hemos terminado
 		if( numAliens == 0 ) {
-			SceneManager.LoadScene ("Nivel1");
+			
+			PlayerPrefs.SetInt ("marcador", marcador.GetComponent<ControlMarcador> ().puntos);
+
+			switch (nivel) {
+				case 1:
+					SceneManager.LoadScene ("Nivel2");
+					break;
+				case 2:
+					SceneManager.LoadScene ("Nivel3");
+					break;
+				default:
+					SceneManager.LoadScene ("Nivel4");
+				break;
+			}
+				
 		}
 
 		// Si al menos un alien ha tocado el borde, todo el pack cambia de rumbo
@@ -135,16 +162,47 @@ public class GeneradorAliens : MonoBehaviour
 
 				// Posición de cada alien
 				Vector2 posicion = new Vector2 (origen.x + (espacioH * j), origen.y + (espacioV * i));
+				Rigidbody2D alien = null;
 
-				// Instanciamos el objeto partiendo del prefab
-				Rigidbody2D alien = (Rigidbody2D)Instantiate (prefabAlien1, posicion, transform.rotation);
+				if (nivel == 1) {
+					
+					// Instanciamos el objeto partiendo del prefab
+					alien = (Rigidbody2D)Instantiate (prefabAlien1, posicion, transform.rotation);
 
+					// Escala opcional, por defecto 1.0f (sin escala)
+					// Nota: El prefab original ya está escalado a 0.2f
+					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
+
+				} else if (nivel == 2) {
+					
+					// Instanciamos el objeto partiendo del prefab
+					alien = (Rigidbody2D)Instantiate (prefabAlien2, posicion, transform.rotation);
+
+					// Escala opcional, por defecto 1.0f (sin escala)
+					// Nota: El prefab original ya está escalado a 0.2f
+					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
+
+				} else if (nivel == 3) {
+					// Instanciamos el objeto partiendo del prefab
+					alien = (Rigidbody2D)Instantiate (prefabAlien3, posicion, transform.rotation);
+
+					// Escala opcional, por defecto 1.0f (sin escala)
+					// Nota: El prefab original ya está escalado a 0.2f
+					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
+				} else if (nivel == 4) {
+					// Instanciamos el objeto partiendo del prefab
+					alien = (Rigidbody2D)Instantiate (prefabAlien4, posicion, transform.rotation);
+
+					// Escala opcional, por defecto 1.0f (sin escala)
+					// Nota: El prefab original ya está escalado a 0.2f
+					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
+				} else {
+					
+				}
+					
 				// Guardamos el alien en el array
 				aliens [i, j] = alien;
 
-				// Escala opcional, por defecto 1.0f (sin escala)
-				// Nota: El prefab original ya está escalado a 0.2f
-				alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
 			}
 		}
 
