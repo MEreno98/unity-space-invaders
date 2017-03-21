@@ -8,7 +8,10 @@ public class ControlAlien : MonoBehaviour
 	private GameObject marcador;
 
 	// Por defecto, 100 puntos por cada alien
-	private int puntos = 100;
+	public int puntos;
+
+	//Vida del alien (Cantidad de impactos)
+	public int vida;
 
 	// Objeto para reproducir la explosión de un alien
 	private GameObject efectoExplosion;
