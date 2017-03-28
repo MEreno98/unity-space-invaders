@@ -45,6 +45,9 @@ public class ControlAlien : MonoBehaviour
 			// Sonido de explosión
 			GetComponent<AudioSource> ().Play ();
 
+			//Cambiar imagen
+			GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite>("Assets/Imagenes/Alien2_dañado.png");
+	
 			// El disparo desaparece (cuidado, si tiene eventos no se ejecutan)
 			Destroy (coll.gameObject);
 

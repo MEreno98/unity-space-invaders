@@ -174,24 +174,53 @@ public class GeneradorAliens : MonoBehaviour
 					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
 
 				} else if (nivel == 2) {
-					
-					// Instanciamos el objeto partiendo del prefab
-					alien = (Rigidbody2D)Instantiate (prefabAlien2, posicion, transform.rotation);
 
+					float rdm = Random.Range (0, 4);
+
+					if (rdm < 2) {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien2, posicion, transform.rotation);
+					} else {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien1, posicion, transform.rotation);
+					}
+						
 					// Escala opcional, por defecto 1.0f (sin escala)
 					// Nota: El prefab original ya está escalado a 0.2f
 					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
 
 				} else if (nivel == 3) {
-					// Instanciamos el objeto partiendo del prefab
-					alien = (Rigidbody2D)Instantiate (prefabAlien3, posicion, transform.rotation);
 
+					float rdm = Random.Range (0, 6);
+
+					if (rdm < 2) {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien2, posicion, transform.rotation);
+					} else if (rdm >= 2 && rdm < 4) {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien3, posicion, transform.rotation);
+					} else {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien1, posicion, transform.rotation);
+					}
+
+				
 					// Escala opcional, por defecto 1.0f (sin escala)
 					// Nota: El prefab original ya está escalado a 0.2f
 					alien.transform.localScale = new Vector2 (0.2f * escala, 0.2f * escala);
 				} else if (nivel == 4) {
-					// Instanciamos el objeto partiendo del prefab
-					alien = (Rigidbody2D)Instantiate (prefabAlien4, posicion, transform.rotation);
+					float rdm = Random.Range (0, 6);
+
+					if (rdm < 1.5) {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien2, posicion, transform.rotation);
+					} else if (rdm >= 1.5 && rdm < 4.4) {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien4, posicion, transform.rotation);
+					} else {
+						// Instanciamos el objeto partiendo del prefab
+						alien = (Rigidbody2D)Instantiate (prefabAlien3, posicion, transform.rotation);
+					}
 
 					// Escala opcional, por defecto 1.0f (sin escala)
 					// Nota: El prefab original ya está escalado a 0.2f
