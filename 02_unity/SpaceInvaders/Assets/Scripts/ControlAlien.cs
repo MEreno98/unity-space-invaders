@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class ControlAlien : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ControlAlien : MonoBehaviour
 
 	//Vida del alien (Cantidad de impactos)
 	public int vida;
+
+	public Sprite[] aliensDañados;
 
 	// Objeto para reproducir la explosión de un alien
 	private GameObject efectoExplosion;
@@ -45,9 +48,11 @@ public class ControlAlien : MonoBehaviour
 			// Sonido de explosión
 			GetComponent<AudioSource> ().Play ();
 
-			//Cambiar imagen
-			GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite>("Assets/Imagenes/Alien2_dañado.png");
-	
+		
+			if (aliensDañados.Length > 0 & vida != 0) {
+				GetComponent<SpriteRenderer> ().sprite = aliensDañados[vida];
+			}
+				
 			// El disparo desaparece (cuidado, si tiene eventos no se ejecutan)
 			Destroy (coll.gameObject);
 
@@ -66,4 +71,5 @@ public class ControlAlien : MonoBehaviour
 			SceneManager.LoadScene ("Nivel1");
 		}
 	}
+		
 }
