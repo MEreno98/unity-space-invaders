@@ -11,6 +11,7 @@ public class GeneradorAliens : MonoBehaviour
 	public Rigidbody2D prefabAlien3;
 	public Rigidbody2D prefabAlien4;
 	public int nivel;
+	public float velY;
 
 	// Referencia para guardar una matriz de objetos
 	private Rigidbody2D[,] aliens;
@@ -35,6 +36,8 @@ public class GeneradorAliens : MonoBehaviour
 	// Velocidad a la que se desplazan los aliens (medido en u/s)
 	private float velocidad = 5f;
 
+	private float minY;
+
 	private GameObject marcador;
 
 	// Use this for initialization
@@ -53,6 +56,8 @@ public class GeneradorAliens : MonoBehaviour
 		limiteIzq = -1.0f * distanciaHorizontal + 1;
 		limiteDer = 1.0f * distanciaHorizontal - 1;
 
+		minY = Camera.main.orthographicSize - Camera.main.orthographicSize * 2;
+
 		if (nivel > 1) {
 			marcador.GetComponent<ControlMarcador> ().puntos = PlayerPrefs.GetInt ("marcador");
 		}
@@ -70,9 +75,12 @@ public class GeneradorAliens : MonoBehaviour
 		// Recorremos la horda alienígena
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
-
 				// Comprobamos que haya objeto, para cuando nos empiecen a disparar
 				if (aliens [i, j] != null) {
+					
+					if (aliens [i, j].position.y < 0 && aliens [i, j].position.y < minY) {
+						SceneManager.LoadScene ("Nivel1");
+					}
 
 					// Un alien más
 					numAliens += 1;
@@ -81,7 +89,9 @@ public class GeneradorAliens : MonoBehaviour
 					if (rumbo == direccion.DER) {
 
 						// Nos movemos a la derecha (todos los aliens que queden)
+						aliens [i, j].transform.Translate (Vector2.down * velY * Time.deltaTime);
 						aliens [i, j].transform.Translate (Vector2.right * velocidad * Time.deltaTime);
+		
 
 						// Comprobamos si hemos tocado el borde
 						if (aliens [i, j].transform.position.x > limiteDer) {
@@ -90,12 +100,14 @@ public class GeneradorAliens : MonoBehaviour
 					} else {
 
 						// Nos movemos a la derecha (todos los aliens que queden)
+						aliens [i, j].transform.Translate (Vector2.down * velY * Time.deltaTime);
 						aliens [i, j].transform.Translate (Vector2.left * velocidad * Time.deltaTime);
 
 						// Comprobamos si hemos tocado el borde
 						if (aliens [i, j].transform.position.x < limiteIzq) {
 							limiteAlcanzado = true;
 						}
+							
 					}		
 				}
 			}
@@ -122,17 +134,6 @@ public class GeneradorAliens : MonoBehaviour
 
 		// Si al menos un alien ha tocado el borde, todo el pack cambia de rumbo
 		if (limiteAlcanzado == true) {
-			for (int i = 0; i < FILAS; i++) {
-				for (int j = 0; j < COLUMNAS; j++) {
-
-					// Comprobamos que haya objeto, para cuando nos empiecen a disparar
-					if (aliens [i, j] != null) {
-						aliens[i,j].transform.Translate (Vector2.down * altura);
-					}
-				}
-			}
-
-
 			if (rumbo == direccion.DER) {
 				rumbo = direccion.IZQ;
 			} else {
