@@ -26,9 +26,6 @@ public class GeneradorAliens : MonoBehaviour
 	// Rumbo que lleva el pack de aliens
 	private direccion rumbo = direccion.DER;
 
-	// Posición vertical de la horda (lo iremos restando de la .y de cada alien)
-	private float altura = 0.5f;
-
 	// Límites de la pantalla
 	private float limiteIzq;
 	private float limiteDer;
@@ -79,7 +76,8 @@ public class GeneradorAliens : MonoBehaviour
 				if (aliens [i, j] != null) {
 					
 					if (aliens [i, j].position.y < 0 && aliens [i, j].position.y < minY) {
-						SceneManager.LoadScene ("Nivel1");
+						PlayerPrefs.DeleteKey ("marcador");
+						SceneManager.LoadScene ("GameOver");
 					}
 
 					// Un alien más

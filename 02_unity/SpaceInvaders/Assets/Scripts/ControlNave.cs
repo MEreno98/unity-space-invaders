@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ControlNave : MonoBehaviour
 {
@@ -54,6 +55,15 @@ public class ControlNave : MonoBehaviour
 		// Disparo
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			disparar ();
+		}
+
+		if (Input.GetKey (KeyCode.P)) {
+			
+			if (Time.timeScale == 1) {
+				Time.timeScale = 0;
+			}
+
+			SceneManager.LoadScene ("Pause", LoadSceneMode.Single);
 		}
 	}
 
