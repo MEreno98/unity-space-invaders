@@ -57,14 +57,6 @@ public class ControlNave : MonoBehaviour
 			disparar ();
 		}
 
-		if (Input.GetKey (KeyCode.P)) {
-			
-			if (Time.timeScale == 1) {
-				Time.timeScale = 0;
-			}
-
-			SceneManager.LoadScene ("Pause", LoadSceneMode.Single);
-		}
 	}
 
 	void disparar ()
