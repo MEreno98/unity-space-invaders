@@ -68,7 +68,8 @@ public class ControlAlien : MonoBehaviour
 			}
 				
 		} else if (coll.gameObject.tag == "nave") {
-			SceneManager.LoadScene ("Nivel1");
+			PlayerPrefs.DeleteKey ("marcador");
+			SceneManager.LoadScene ("GameOver");
 		}
 	}
 		
