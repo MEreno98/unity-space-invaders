@@ -68,7 +68,7 @@ public class ControlNave : MonoBehaviour
 		d.gravityScale = 0;
 
 		// Posición de partida, en la punta de la nave
-		d.transform.Translate (Vector2.up * 0.7f);
+		d.transform.Translate (Vector2.up * 0.8f);
 
 		// Lanzarlo
 		d.AddForce (Vector2.up * fuerza, ForceMode2D.Impulse);	
