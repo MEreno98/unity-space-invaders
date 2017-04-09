@@ -13,6 +13,8 @@ public class ControlNave : MonoBehaviour
 
 	// Acceso al prefab del disparo
 	public Rigidbody2D disparo;
+	public Rigidbody2D nave1;
+	public Rigidbody2D nave2;
 
 	// Use this for initialization
 	void Start ()
@@ -30,39 +32,66 @@ public class ControlNave : MonoBehaviour
 		float limiteIzq = -1.0f * distanciaHorizontal;
 		float limiteDer = 1.0f * distanciaHorizontal;
 
-		// Tecla: Izquierda
+		// Nave Jug1 Tecla: Izquierda
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 
 			// Nos movemos a la izquierda hasta llegar al límite para entrar por el otro lado
-			if (transform.position.x > limiteIzq) {
-				transform.Translate (Vector2.left * velocidad * Time.deltaTime);
+			if (nave1.transform.position.x > limiteIzq) {
+				nave1.transform.Translate (Vector2.left * velocidad * Time.deltaTime);
 			} else {
-				transform.position = new Vector2 (limiteDer, transform.position.y);			
+				nave1.transform.position = new Vector2 (limiteDer, nave1.transform.position.y);			
 			}
 		}
 
-		// Tecla: Derecha
+		// Nave Jug1 Tecla: Derecha
 		if (Input.GetKey (KeyCode.RightArrow)) {
 
 			// Nos movemos a la derecha hasta llegar al límite para entrar por el otro lado
-			if (transform.position.x < limiteDer) {
+			if (nave1.transform.position.x < limiteDer) {
 				transform.Translate (Vector2.right * velocidad * Time.deltaTime);
 			} else {
-				transform.position = new Vector2 (limiteIzq, transform.position.y);			
+				nave1.transform.position = new Vector2 (limiteIzq, nave1.transform.position.y);			
 			}
 		}
 
-		// Disparo
+		// Nave Jug1 Disparo
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			disparar ();
+			disparar (nave1);
+		}
+
+		// Nave Jug1 Tecla: Izquierda
+		if (Input.GetKey (KeyCode.A)) {
+
+			// Nos movemos a la izquierda hasta llegar al límite para entrar por el otro lado
+			if (nave2.transform.position.x > limiteIzq) {
+				nave2.transform.Translate (Vector2.left * velocidad * Time.deltaTime);
+			} else {
+				nave2.transform.position = new Vector2 (limiteDer, nave2.transform.position.y);			
+			}
+		}
+
+		// Nave Jug1 Tecla: Derecha
+		if (Input.GetKey (KeyCode.D)) {
+
+			// Nos movemos a la derecha hasta llegar al límite para entrar por el otro lado
+			if (nave2.transform.position.x < limiteDer) {
+				transform.Translate (Vector2.right * velocidad * Time.deltaTime);
+			} else {
+				nave2.transform.position = new Vector2 (limiteIzq, nave2.transform.position.y);			
+			}
+		}
+
+		// Nave Jug1 Disparo
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			disparar (nave2);
 		}
 
 	}
 
-	void disparar ()
+	void disparar (Rigidbody2D nave)
 	{
 		// Hacemos copias del prefab del disparo y las lanzamos
-		Rigidbody2D d = (Rigidbody2D)Instantiate (disparo, transform.position, transform.rotation);
+		Rigidbody2D d = (Rigidbody2D)Instantiate (disparo, nave.transform.position, nave.transform.rotation);
 
 		// Desactivar la gravedad para este objeto, si no, ¡se cae!
 		d.gravityScale = 0;
