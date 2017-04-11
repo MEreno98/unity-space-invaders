@@ -22,10 +22,14 @@ public class ControlDisparoCargado : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D coll) {
-		impactos -= 1;
+		if (coll.gameObject.tag == "alien") {
+			impactos -= 1;
 
-		if (impactos == 0) {
-			Destroy (gameObject);
+			if (impactos == 0) {
+				Destroy (gameObject);
+			}
+		} else if(coll.gameObject.tag == "disparo"){
+			Destroy (coll.gameObject);
 		}
 	}
 }
