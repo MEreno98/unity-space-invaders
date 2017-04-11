@@ -69,7 +69,7 @@ public class ControlNave : MonoBehaviour
 			//Nave Jug1 Disparo cargado
 			if (Input.GetKeyUp (KeyCode.LeftAlt)) {
 				if (nave1 != null) {
-					if (GameObject.Find ("DisparoSec(Clone)") == null) {
+				if (GameObject.FindWithTag("dc1") == null) {
 						dispararCargado (nave1);
 					}
 				}
@@ -108,7 +108,7 @@ public class ControlNave : MonoBehaviour
 
 			//Nave Jug2 Disparo cargado
 			if (Input.GetKeyUp (KeyCode.F)) {
-				if (GameObject.Find ("Disparo_bldueSec(Clone)") == null) {
+			if (GameObject.FindWithTag("dc2") == null) {
 					if (nave2 != null) { 
 						dispararCargado (nave2);
 					}
