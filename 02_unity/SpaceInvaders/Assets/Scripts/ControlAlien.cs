@@ -70,6 +70,7 @@ public class ControlAlien : MonoBehaviour
 		} else if (coll.gameObject.tag == "nave") {
 			PlayerPrefs.DeleteKey ("marcador");
 			SceneManager.LoadScene ("GameOver");
+
 		} else if (coll.gameObject.tag == "disparoCargado") {
 			// Sonido de explosión
 			GetComponent<AudioSource> ().Play ();

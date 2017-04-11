@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ControlDisparo : MonoBehaviour
 {
-	public int 
 	// Use this for initialization
 	void Start ()
 	{
