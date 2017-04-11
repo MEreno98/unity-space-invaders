@@ -36,71 +36,85 @@ public class ControlNave : MonoBehaviour
 
 		// Nave Jug1 Tecla: Izquierda
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-
-			// Nos movemos a la izquierda hasta llegar al límite para entrar por el otro lado
-			if (nave1.transform.position.x > limiteIzq) {
-				nave1.transform.Translate (Vector2.left * velocidad * Time.deltaTime);
-			} else {
-				nave1.transform.position = new Vector2 (limiteDer, nave1.transform.position.y);			
+			if (nave1 != null) {
+				// Nos movemos a la izquierda hasta llegar al límite para entrar por el otro lado
+				if (nave1.transform.position.x > limiteIzq) {
+					nave1.transform.Translate (Vector2.left * velocidad * Time.deltaTime);
+				} else {
+					nave1.transform.position = new Vector2 (limiteDer, nave1.transform.position.y);			
+				}
 			}
 		}
+		
 
-		// Nave Jug1 Tecla: Derecha
-		if (Input.GetKey (KeyCode.RightArrow)) {
-
-			// Nos movemos a la derecha hasta llegar al límite para entrar por el otro lado
-			if (nave1.transform.position.x < limiteDer) {
-				transform.Translate (Vector2.right * velocidad * Time.deltaTime);
-			} else {
-				nave1.transform.position = new Vector2 (limiteIzq, nave1.transform.position.y);			
+			// Nave Jug1 Tecla: Derecha
+			if (Input.GetKey (KeyCode.RightArrow)) {
+				if (nave1 != null) {
+					// Nos movemos a la derecha hasta llegar al límite para entrar por el otro lado
+					if (nave1.transform.position.x < limiteDer) {
+						transform.Translate (Vector2.right * velocidad * Time.deltaTime);
+					} else {
+						nave1.transform.position = new Vector2 (limiteIzq, nave1.transform.position.y);			
+					}
+				}
 			}
-		}
 
-		// Nave Jug1 Disparo
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			disparar (nave1);
-		}
-
-		//Nave Jug2 Disparo cargado
-		if(Input.GetKeyUp(KeyCode.LeftAlt)){
-			if (GameObject.Find ("DisparoSec(Clone)") == null) {
-				dispararCargado (nave1);
+			// Nave Jug1 Disparo
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (nave1 != null) {
+					disparar (nave1);
+				}
 			}
-		}
 
-		// Nave Jug2 Tecla: Izquierda
-		if (Input.GetKey (KeyCode.A)) {
-
-			// Nos movemos a la izquierda hasta llegar al límite para entrar por el otro lado
-			if (nave2.transform.position.x > limiteIzq) {
-				nave2.transform.Translate (Vector2.left * velocidad * Time.deltaTime);
-			} else {
-				nave2.transform.position = new Vector2 (limiteDer, nave2.transform.position.y);			
+			//Nave Jug1 Disparo cargado
+			if (Input.GetKeyUp (KeyCode.LeftAlt)) {
+				if (nave1 != null) {
+					if (GameObject.Find ("DisparoSec(Clone)") == null) {
+						dispararCargado (nave1);
+					}
+				}
 			}
-		}
 
-		// Nave Jug2 Tecla: Derecha
-		if (Input.GetKey (KeyCode.D)) {
-
-			// Nos movemos a la derecha hasta llegar al límite para entrar por el otro lado
-			if (nave2.transform.position.x < limiteDer) {
-				transform.Translate (Vector2.right * velocidad * Time.deltaTime);
-			} else {
-				nave2.transform.position = new Vector2 (limiteIzq, nave2.transform.position.y);			
+			// Nave Jug2 Tecla: Izquierda
+			if (Input.GetKey (KeyCode.A)) {
+				if (nave2 != null) {
+					// Nos movemos a la izquierda hasta llegar al límite para entrar por el otro lado
+					if (nave2.transform.position.x > limiteIzq) {
+						nave2.transform.Translate (Vector2.left * velocidad * Time.deltaTime);
+					} else {
+						nave2.transform.position = new Vector2 (limiteDer, nave2.transform.position.y);			
+					}
+				}
 			}
-		}
 
-		// Nave Jug2 Disparo
-		if (Input.GetKeyDown (KeyCode.LeftShift)) {
-			disparar (nave2);
-		}
-
-		//Nave Jug2 Disparo cargado
-		if(Input.GetKeyUp(KeyCode.F)){
-			if (GameObject.Find ("Disparo_blueSec(Clone)") == null) {
-				dispararCargado (nave2);
+			// Nave Jug2 Tecla: Derecha
+			if (Input.GetKey (KeyCode.D)) {
+				if (nave2 != null) {
+					// Nos movemos a la derecha hasta llegar al límite para entrar por el otro lado
+					if (nave2.transform.position.x < limiteDer) {
+						transform.Translate (Vector2.right * velocidad * Time.deltaTime);
+					} else {
+						nave2.transform.position = new Vector2 (limiteIzq, nave2.transform.position.y);			
+					}
+				}
 			}
-		}
+
+			// Nave Jug2 Disparo
+			if (Input.GetKeyDown (KeyCode.LeftShift)) {
+				if (nave2 != null) { 
+					disparar (nave2);
+				}
+			}
+
+			//Nave Jug2 Disparo cargado
+			if (Input.GetKeyUp (KeyCode.F)) {
+				if (GameObject.Find ("Disparo_bldueSec(Clone)") == null) {
+					if (nave2 != null) { 
+						dispararCargado (nave2);
+					}
+				}
+			}
+
 
 	}
 
