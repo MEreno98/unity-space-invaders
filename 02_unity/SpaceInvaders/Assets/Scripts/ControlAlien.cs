@@ -50,7 +50,7 @@ public class ControlAlien : MonoBehaviour
 
 		
 			if (aliensDañados.Length > 0 & vida != 0) {
-				GetComponent<SpriteRenderer> ().sprite = aliensDañados[vida];
+				GetComponent<SpriteRenderer> ().sprite = aliensDañados [vida];
 			}
 				
 			// El disparo desaparece (cuidado, si tiene eventos no se ejecutan)
@@ -70,6 +70,18 @@ public class ControlAlien : MonoBehaviour
 		} else if (coll.gameObject.tag == "nave") {
 			PlayerPrefs.DeleteKey ("marcador");
 			SceneManager.LoadScene ("GameOver");
+
+		} else if (coll.gameObject.tag == "disparoCargado") {
+			// Sonido de explosión
+			GetComponent<AudioSource> ().Play ();
+
+			// Sumar la puntuación al marcador
+			marcador.GetComponent<ControlMarcador> ().puntos += puntos;
+
+			// El alien desaparece (no hace falta retraso para la explosión, está en otro objeto)
+			efectoExplosion.GetComponent<AudioSource> ().Play ();
+			Destroy (gameObject);
+
 		}
 	}
 		
