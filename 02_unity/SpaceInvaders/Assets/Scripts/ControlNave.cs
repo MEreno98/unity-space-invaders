@@ -145,8 +145,6 @@ public class ControlNave : MonoBehaviour
 		// Posición de partida, en la punta de la nave
 		d.transform.Translate (Vector2.up * 1.5f);
 
-		// Lanzarlo
-		d.AddForce (Vector2.up * fuerzaSec, ForceMode2D.Impulse);	
 	}
 
 }

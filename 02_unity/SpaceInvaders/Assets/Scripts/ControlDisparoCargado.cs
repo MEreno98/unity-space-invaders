@@ -13,7 +13,7 @@ public class ControlDisparoCargado : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.Translate (Vector2.up * 3.5f * Time.deltaTime);
+		gameObject.transform.Translate (Vector2.up * 4f * Time.deltaTime);
 
 		// Eliminamos el objeto si se sale de la pantalla
 		if (transform.position.y > 10) {
